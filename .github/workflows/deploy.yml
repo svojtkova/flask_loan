@@ -1,13 +1,20 @@
-stages:
-  - deploy
+on:
+  push:
+    branches:
+      - main
 
-deploy-railway:
-  stage: deploy
-  image: ubuntu
-  only:
-    - pushes
-    - main
-  script:
-    - apt-get update && apt-get install -y curl
-    - curl -fsSL https://railway.app/install.sh | sh
-    - railway up --service=$RAILWAY_SERVICE_NAME -d
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install and Update
+        run: apt-get update && apt-get install -y curl
+
+      - name: Install Railway
+        run: curl -fsSL https://railway.app/install.sh | sh
+
+      - name: Deploy
+        run: railway up 
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
