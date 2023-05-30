@@ -8,9 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install and Update
-        run: apt-get update && apt-get install -y curl
-
       - name: Install Railway
         run: curl -fsSL https://railway.app/install.sh | sh
 
