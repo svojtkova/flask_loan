@@ -16,7 +16,7 @@ api = Api(app, version='1.0', title='Your API',
 ns = api.namespace('api', description='Loan API calls')
 
 
-loaded_model = joblib.load('random_forest_model.joblib')
+
 
 
 @ns.route('/loan')
@@ -33,7 +33,7 @@ class LoadDefault(Resource):
             df2['verification_status'] = df2['verification_status'].astype(
                 str).astype(int)
             
-
+            loaded_model = joblib.load('random_forest_model.joblib')
             probabilities = loaded_model.predict_proba(df2)
 
             for i, probs in enumerate(probabilities):
