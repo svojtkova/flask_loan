@@ -3,7 +3,7 @@ from flask_restx import Api, Resource
 import os
 import json
 import pandas as pd
-import joblib
+from sklearn.externals import joblib
 import sklearn
 from flask_cors import CORS
 
