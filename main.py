@@ -45,6 +45,7 @@ class LoadDefault(Resource):
             return { 'message': string }
 
         except Exception as e:
+            print(str(e))
             return {'error': str(e)}, 500
 
 
