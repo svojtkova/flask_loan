@@ -21,7 +21,7 @@ ns = api.namespace('api', description='Loan API calls')
 #loaded_model = pickle.load(open(fname, 'rb'))
 
 
-with zipfile.ZipFile('random_forest_model.zip', 'r') as zip_file:
+with zipfile.ZipFile('./random_forest_model.zip', 'r') as zip_file:
     zip_file.extractall()
 
 fname = './random_forest_model.pkl'
