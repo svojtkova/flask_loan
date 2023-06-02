@@ -18,13 +18,11 @@ api = Api(app, version='1.0', title='Your API',
 
 ns = api.namespace('api', description='Loan API calls')
 
-#loaded_model = joblib.load(open(fname, 'rb'))
-#loaded_model = pickle.load(open(fname, 'rb'))
 
 zip_path = os.path.join(os.getcwd(), "random_forest_model.zip")
 
-#with zipfile.ZipFile(zip_path, 'r') as zip_file:
-#    zip_file.extractall()
+with zipfile.ZipFile(zip_path, 'r') as zip_file:
+    zip_file.extractall()
 
 fname =  os.path.join(os.getcwd(),'random_forest_model.pkl')
 loaded_model =  pickle.load(open(fname,'rb'))
@@ -45,9 +43,6 @@ class LoadDefault(Resource):
                 str).astype(int)
             
             df2 = np.array(df2).astype(np.float32)
-            
-            
-            
             
 
             probabilities = loaded_model.predict_proba(df2)
