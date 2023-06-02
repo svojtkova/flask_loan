@@ -8,6 +8,7 @@ import pickle
 import joblib
 from flask_cors import CORS
 import zipfile
+import os
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -20,11 +21,12 @@ ns = api.namespace('api', description='Loan API calls')
 #loaded_model = joblib.load(open(fname, 'rb'))
 #loaded_model = pickle.load(open(fname, 'rb'))
 
+zip_path = os.path.join(os.getcwd(), "random_forest_model.zip")
 
-with zipfile.ZipFile('random_forest_model.zip', 'r') as zip_file:
+with zipfile.ZipFile(zip_path, 'r') as zip_file:
     zip_file.extractall()
 
-fname = 'random_forest_model.pkl'
+fname =  os.path.join(os.getcwd(),'random_forest_model.pkl')
 loaded_model =  pickle.load(open(fname,'rb'))
 
 
@@ -35,7 +37,6 @@ class LoadDefault(Resource):
             string = ''
             data = request.get_json()
             df2 = pd.json_normalize(data)
-            print(df2)
 
             df2['term'] = df2['term'].astype(str).astype(int)
             df2['grade'] = df2['grade'].astype(str).astype(int)
