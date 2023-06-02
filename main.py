@@ -16,7 +16,7 @@ api = Api(app, version='1.0', title='Your API',
 
 
 ns = api.namespace('api', description='Loan API calls')
-fname = './random_forest_model_comp.pkl'
+fname = './random_forest_model_comp.joblib'
 #loaded_model = joblib.load(open(fname, 'rb'))
 #loaded_model = pickle.load(open(fname, 'rb'))
 
