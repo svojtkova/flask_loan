@@ -17,8 +17,14 @@ api = Api(app, version='1.0', title='Your API',
 ns = api.namespace('api', description='Loan API calls')
 fname = 'random_forest_model.joblib'
 #loaded_model = joblib.load(open(fname, 'rb'))
-loaded_model = cPickle.load(open(fname, 'rb'))
+#loaded_model = cPickle.load(open(fname, 'rb'))
 
+import urllib.request
+
+url = "https://drive.google.com/uc?export=download&id=1YsaTKLeBMkEdV98EYbRgJZVlP_3k9ott"
+from urllib.request import urlopen
+loaded_model = joblib.load(urlopen(url))
+#loaded_model = cPickle.load(urllib.request.urlopen(url))
 
 @ns.route('/loan')
 class LoadDefault(Resource):
@@ -27,7 +33,6 @@ class LoadDefault(Resource):
             string = ''
             data = request.get_json()
             df2 = pd.json_normalize(data)
-            print(df2)
 
             df2['term'] = df2['term'].astype(str).astype(int)
             df2['grade'] = df2['grade'].astype(str).astype(int)
