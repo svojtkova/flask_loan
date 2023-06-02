@@ -3,7 +3,7 @@ from flask_restx import Api, Resource
 import os
 import json
 import pandas as pd
-import joblib
+import pickle as cPickle
 import sklearn
 from flask_cors import CORS
 
@@ -33,7 +33,10 @@ class LoadDefault(Resource):
             df2['verification_status'] = df2['verification_status'].astype(
                 str).astype(int)
             
-            loaded_model = joblib.load('random_forest_model.joblib')
+            #loaded_model = joblib.load('random_forest_model.joblib')
+            loaded_model = cPickle.load(open('random_forest_model.pkl', 'rb'))
+            
+
             probabilities = loaded_model.predict_proba(df2)
 
             for i, probs in enumerate(probabilities):
