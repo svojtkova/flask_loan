@@ -4,9 +4,10 @@ import os
 import json
 import numpy as np
 import pandas as pd
-import pickle as cPickle
+import pickle
 import joblib
 from flask_cors import CORS
+import zipfile
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -17,7 +18,7 @@ api = Api(app, version='1.0', title='Your API',
 ns = api.namespace('api', description='Loan API calls')
 fname = './random_forest_model.pkl'
 #loaded_model = joblib.load(open(fname, 'rb'))
-loaded_model = cPickle.load(open(fname, 'rb'))
+#loaded_model = pickle.load(open(fname, 'rb'))
 
 import urllib.request
 
@@ -25,6 +26,16 @@ import urllib.request
 #from urllib.request import urlopen
 #loaded_model = joblib.load(urlopen(url))
 #loaded_model = cPickle.load(urllib.request.urlopen(url))
+
+
+    # Extract the pickle file from the zip file
+with zipfile.ZipFile('random_forest_model.zip', 'r') as zip_file:
+     zip_file.extractall()
+
+    # Load the Random Forest Classifier from the pickle file
+
+loaded_model = pickle.load(open(fname,'rb'))
+
 
 @ns.route('/loan')
 class LoadDefault(Resource):
