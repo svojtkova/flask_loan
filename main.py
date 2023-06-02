@@ -16,7 +16,7 @@ api = Api(app, version='1.0', title='Your API',
 
 
 ns = api.namespace('api', description='Loan API calls')
-fname = './random_forest_model.pkl'
+fname = './random_forest_model_comp.pkl'
 #loaded_model = joblib.load(open(fname, 'rb'))
 #loaded_model = pickle.load(open(fname, 'rb'))
 
@@ -34,7 +34,7 @@ with zipfile.ZipFile('random_forest_model.zip', 'r') as zip_file:
 
     # Load the Random Forest Classifier from the pickle file
 
-loaded_model = pickle.load(open(fname,'rb'))
+loaded_model =  joblib.load(open(fname,'rb'))
 
 
 @ns.route('/loan')
