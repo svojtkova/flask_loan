@@ -5,7 +5,6 @@ import json
 import numpy as np
 import pandas as pd
 import pickle as cPickle
-import sklearn
 import joblib
 from flask_cors import CORS
 
@@ -16,10 +15,9 @@ api = Api(app, version='1.0', title='Your API',
 
 
 ns = api.namespace('api', description='Loan API calls')
-
-#loaded_model = joblib.load('random_forest_model.joblib')
-loaded_model = cPickle.load(open('random_forest_model.pkl', 'rb'))
-
+fname = 'random_forest_model.pkl'
+loaded_model = joblib.load(open(fname, 'rb'))
+#loaded_model = cPickle.load(open(, 'rb'))
 
 
 @ns.route('/loan')
