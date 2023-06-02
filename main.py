@@ -21,7 +21,7 @@ fname = 'random_forest_model.joblib'
 
 import urllib.request
 
-url = "https://drive.google.com/uc?export=download&id=1YsaTKLeBMkEdV98EYbRgJZVlP_3k9ott"
+url = "https://github.com/svojtkova/flask_loan/blob/main/random_forest_model.joblib?raw=true" #"https://drive.google.com/open?id=1YsaTKLeBMkEdV98EYbRgJZVlP_3k9ott"
 from urllib.request import urlopen
 loaded_model = joblib.load(urlopen(url))
 #loaded_model = cPickle.load(urllib.request.urlopen(url))
@@ -33,6 +33,7 @@ class LoadDefault(Resource):
             string = ''
             data = request.get_json()
             df2 = pd.json_normalize(data)
+            print(df2)
 
             df2['term'] = df2['term'].astype(str).astype(int)
             df2['grade'] = df2['grade'].astype(str).astype(int)
