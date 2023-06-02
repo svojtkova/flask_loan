@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_restx import Api, Resource
 import os
 import json
+import numpy as np
 import pandas as pd
 import pickle as cPickle
 import sklearn
@@ -26,12 +27,16 @@ class LoadDefault(Resource):
             string = ''
             data = request.get_json()
             df2 = pd.json_normalize(data)
+            print(df2)
 
             df2['term'] = df2['term'].astype(str).astype(int)
             df2['grade'] = df2['grade'].astype(str).astype(int)
             df2['subgrade'] = df2['subgrade'].astype(str).astype(int)
             df2['verification_status'] = df2['verification_status'].astype(
                 str).astype(int)
+            
+            df2 = np.array(df2).astype(np.float32)
+            
             
             #loaded_model = joblib.load('random_forest_model.joblib')
             loaded_model = cPickle.load(open('random_forest_model.pkl', 'rb'))
