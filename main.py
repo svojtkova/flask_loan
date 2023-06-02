@@ -16,14 +16,14 @@ api = Api(app, version='1.0', title='Your API',
 
 ns = api.namespace('api', description='Loan API calls')
 fname = 'random_forest_model.joblib'
-#loaded_model = joblib.load(open(fname, 'rb'))
+loaded_model = joblib.load(open(fname, 'rb'))
 #loaded_model = cPickle.load(open(fname, 'rb'))
 
 import urllib.request
 
-url = "https://github.com/svojtkova/flask_loan/blob/main/random_forest_model.joblib?raw=true" #"https://drive.google.com/open?id=1YsaTKLeBMkEdV98EYbRgJZVlP_3k9ott"
-from urllib.request import urlopen
-loaded_model = joblib.load(urlopen(url))
+#url = "https://github.com/svojtkova/flask_loan/blob/main/random_forest_model.joblib?raw=true" #"https://drive.google.com/open?id=1YsaTKLeBMkEdV98EYbRgJZVlP_3k9ott"
+#from urllib.request import urlopen
+#loaded_model = joblib.load(urlopen(url))
 #loaded_model = cPickle.load(urllib.request.urlopen(url))
 
 @ns.route('/loan')
